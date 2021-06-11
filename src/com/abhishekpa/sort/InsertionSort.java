@@ -19,6 +19,19 @@ public class InsertionSort {
         return input;
     }
 
+    public static int[] reverseSort(int... values) {
+        for (int i = 1; i < values.length; i++) {
+            int currValue = values[i];
+            int j = i;
+            while(j > 0 && values[j-1] <= currValue) {
+                values[j] = values[j-1];
+                j--;
+            }
+            values[j] = currValue;
+        }
+        return values;
+    }
+
     public static void main(String[] args) {
         List<int[]> listOfArray = new ArrayList<>();
         listOfArray.add(new int[]{});
@@ -28,7 +41,7 @@ public class InsertionSort {
         listOfArray.add(new int[]{-8, 0, 1, -4, -8, 1, 3, 5});
 
         for (int[] values : listOfArray) {
-            ArrayUtils.print(sort(values));
+            ArrayUtils.print(reverseSort(values));
         }
     }
 }
