@@ -7,7 +7,6 @@ public class BinarySearch {
 
     private static int binarySearch(int[] values, int key, int start, int end) {
         if (start > end) return -1;
-        if (start == end && values[start] != key) return -1;
         int mid = start + (end - start) / 2;
         if (values[mid] == key) {
             return mid;
