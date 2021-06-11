@@ -41,7 +41,7 @@ public class InsertionSort {
         listOfArray.add(new int[]{-8, 0, 1, -4, -8, 1, 3, 5});
 
         for (int[] values : listOfArray) {
-            ArrayUtils.print(reverseSort(values));
+            ArrayUtils.print(sort(values));
         }
     }
 }
