@@ -10,17 +10,11 @@ public class BubbleSort {
         for (int i = 0; i < values.length; i++) {
             for (int j = 0; j < values.length - i - 1; j++) {
                 if (values[j] > values[j+1]) {
-                    swap(values, j, j+1);
+                    ArrayUtils.swap(values, j, j+1);
                 }
             }
         }
         return values;
-    }
-
-    private static void swap(int[] values, int i, int j) {
-        values[i] += values[j];
-        values[j] = values[i] - values[j];
-        values[i] -= values[j];
     }
 
     public static void main(String[] args) {

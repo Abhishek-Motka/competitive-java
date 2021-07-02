@@ -8,8 +8,8 @@ import java.util.List;
 public class SelectionSort {
     public static int[] sort(int[] values) {
         for (int i = 0; i < values.length - 1; i++) {
-            int min = indexOfMinValue(values, i+1);
-            swap(values, i, min);
+            int min = indexOfMinValue(values, i);
+            ArrayUtils.swap(values, i, min);
         }
         return values;
     }
@@ -20,14 +20,6 @@ public class SelectionSort {
             if (values[i] < values[min]) min = i;
         }
         return min;
-    }
-
-    private static void swap(int[] values, int i, int j) {
-        if (i != j) {
-            values[i] += values[j];
-            values[j] = values[i] - values[j];
-            values[i] -= values[j];
-        }
     }
 
     public static void main(String[] args) {
