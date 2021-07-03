@@ -89,8 +89,22 @@ public class PriorityQueue {
         return this;
     }
 
+    public PriorityQueue delete(int node) {
+        if (node < 0 || node >= this.heapSize) {
+            throw new IllegalArgumentException("Node does not exist");
+        }
+        this.heap[node] = this.heap[this.heapSize - 1];
+        this.heapSize--;
+        HeapUtils.maxHeapifyIterative(this.heap, this.heapSize, node);
+        return this;
+    }
+
     public void print() {
-        ArrayUtils.print(this.heap, 0, this.heapSize - 1);
+        if (this.heapSize == 0) {
+            System.out.println("Empty Heap");
+        } else {
+            ArrayUtils.print(this.heap, 0, this.heapSize - 1);
+        }
     }
 
     public int size() {
@@ -103,6 +117,9 @@ public class PriorityQueue {
         q1.print();
         System.out.println(q1.isMaxHeap());
         System.out.println(q1.max());
+        q1.delete(0).delete(0).delete(0).delete(0).print();
+        q1.delete(0).delete(0).delete(0).delete(0).print();
+        System.out.println(q1.isMaxHeap());
 
         PriorityQueue q2 = new PriorityQueue(new int[] {1, 5, 3, 4, 6, 10, 1, 2});
         q2.print();
