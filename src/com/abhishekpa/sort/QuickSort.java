@@ -13,14 +13,13 @@ public class QuickSort {
     private static int partition(int[] array, int start, int end) {
         int pivot = array[end];
         int lastSwaped = start - 1;
-        for (int i = start; i < end; i++) {
+        for (int i = start; i <= end; i++) {
             if (array[i] <= pivot) {
                 lastSwaped++;
                 ArrayUtils.swap(array, lastSwaped, i);
             }
         }
-        ArrayUtils.swap(array, lastSwaped + 1, end);
-        return lastSwaped + 1;
+        return lastSwaped;
     }
 
     private static int randomPartition(int[] array, int start, int end) {
