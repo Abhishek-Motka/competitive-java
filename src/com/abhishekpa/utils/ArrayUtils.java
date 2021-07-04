@@ -30,4 +30,24 @@ public class ArrayUtils {
             values[i] -= values[j];
         }
     }
+
+    public static int max(int[] array) {
+        int max = Integer.MIN_VALUE;
+        for (int value : array) {
+            if (value > max) {
+                max = value;
+            }
+        }
+        return max;
+    }
+
+    public static int min(int[] array) {
+        int min = Integer.MAX_VALUE;
+        for (int value : array) {
+            if (value < min) {
+                min = value;
+            }
+        }
+        return min;
+    }
 }
