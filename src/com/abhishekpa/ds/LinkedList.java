@@ -1,7 +1,5 @@
 package com.abhishekpa.ds;
 
-import sun.lwawt.macosx.CSystemTray;
-
 public class LinkedList
 {
     private Node head;
