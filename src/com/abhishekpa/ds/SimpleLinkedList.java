@@ -50,6 +50,23 @@ public class SimpleLinkedList<T>
         current.setNext(new Node(data));
     }
 
+    public void delete(int position) {
+        if (Objects.isNull(head)) throw new InvalidIndexException();
+        if (position == 0) {
+            head = head.getNext();
+            return;
+        }
+        Node<T> current = head;
+        int i = 1;
+        while (i != position && Objects.nonNull(current)) {
+            i++;
+            current = current.getNext();
+        }
+
+        if (Objects.isNull(current) || Objects.isNull(current.getNext())) throw new InvalidIndexException();
+        current.setNext(current.getNext().getNext());
+    }
+
     public void printList() {
         Node<T> current = head;
         System.out.print("List: [");
@@ -57,7 +74,7 @@ public class SimpleLinkedList<T>
             System.out.print(current.getData().toString()+",");
             current = current.getNext();
         }
-        System.out.print("]");
+        System.out.println("]");
     }
 
     public static void main(String[] args)
@@ -71,6 +88,10 @@ public class SimpleLinkedList<T>
         linkedList.insert(0, 0);
         linkedList.append(6);
         linkedList.append(7);
+        linkedList.printList();
+        linkedList.delete(0);
+        linkedList.delete(6);
+        linkedList.delete(3);
         linkedList.printList();
     }
 
