@@ -77,6 +77,16 @@ public class SimpleLinkedList<T>
         System.out.println("]");
     }
 
+    public int size() {
+        Node<T> current = head;
+        int i = 0;
+        while (Objects.nonNull(current)) {
+            current = current.getNext();
+            i++;
+        }
+        return i;
+    }
+
     public static void main(String[] args)
     {
         SimpleLinkedList<Integer> linkedList = new SimpleLinkedList<>();
@@ -91,8 +101,9 @@ public class SimpleLinkedList<T>
         linkedList.printList();
         linkedList.delete(0);
         linkedList.delete(6);
-        linkedList.delete(3);
         linkedList.printList();
+        linkedList.delete(3);
+        System.out.println("Size: " + linkedList.size());
     }
 
     private class Node<T> {
