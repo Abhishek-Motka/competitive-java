@@ -122,6 +122,37 @@ public class SimpleLinkedList<T>
         curr2.setNext(temp);
     }
 
+    public void reverse() {
+        Node<T> prev = null;
+        Node<T> curr = head;
+        Node<T> next = null;
+
+        while(Objects.nonNull(curr)) {
+            next = curr.getNext();
+            curr.setNext(prev);
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+    }
+
+    public void reverseRecursive() {
+        if (Objects.isNull(head)) return;
+        recursiveReverseUtil(head, null);
+    }
+
+    public void recursiveReverseUtil(Node<T> curr, Node<T> prev) {
+        if (Objects.isNull(curr.getNext())) {
+            head = curr;
+            curr.setNext(prev);
+            return;
+        }
+
+        Node<T> next = curr.getNext();
+        curr.setNext(prev);
+        recursiveReverseUtil(next, curr);
+    }
+
     public static void main(String[] args)
     {
         SimpleLinkedList<Integer> linkedList = new SimpleLinkedList<>();
@@ -141,6 +172,10 @@ public class SimpleLinkedList<T>
         linkedList.swapNodes(3, 6);
         linkedList.swapNodes(4, 2);
         linkedList.swapNodes(2, 1);
+        linkedList.printList();
+        linkedList.reverse();
+        linkedList.printList();
+        linkedList.reverseRecursive();
         linkedList.printList();
         System.out.println("Size: " + linkedList.size());
     }
