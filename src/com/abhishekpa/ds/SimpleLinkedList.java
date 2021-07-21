@@ -2,6 +2,7 @@ package com.abhishekpa.ds;
 
 import com.abhishekpa.ds.exceptions.InvalidIndexException;
 
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class SimpleLinkedList<T>
@@ -87,6 +88,40 @@ public class SimpleLinkedList<T>
         return i;
     }
 
+    public void swapNodes(T data1, T data2) {
+        if (data1.equals(data2)) return;
+
+        Node<T> prev1 = null, curr1 = head;
+        while (Objects.nonNull(curr1) && !curr1.getData().equals(data1)) {
+            prev1 = curr1;
+            curr1 = curr1.getNext();
+        }
+
+        Node<T> prev2 = null, curr2 = head;
+        while (Objects.nonNull(curr2) && !curr2.getData().equals(data2)) {
+            prev2 = curr2;
+            curr2 = curr2.getNext();
+        }
+
+        if (Objects.isNull(curr1) || Objects.isNull(curr2)) throw new NoSuchElementException();
+
+        if (Objects.isNull(prev1)) {
+            head = curr2;
+        } else {
+            prev1.setNext(curr2);
+        }
+
+        if (Objects.isNull(prev2)) {
+            head = curr1;
+        } else {
+            prev2.setNext(curr1);
+        }
+
+        Node<T> temp = curr1.getNext();
+        curr1.setNext(curr2.getNext());
+        curr2.setNext(temp);
+    }
+
     public static void main(String[] args)
     {
         SimpleLinkedList<Integer> linkedList = new SimpleLinkedList<>();
@@ -101,8 +136,12 @@ public class SimpleLinkedList<T>
         linkedList.printList();
         linkedList.delete(0);
         linkedList.delete(6);
-        linkedList.printList();
         linkedList.delete(3);
+        linkedList.printList();
+        linkedList.swapNodes(3, 6);
+        linkedList.swapNodes(4, 2);
+        linkedList.swapNodes(2, 1);
+        linkedList.printList();
         System.out.println("Size: " + linkedList.size());
     }
 
