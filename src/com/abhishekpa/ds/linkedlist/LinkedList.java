@@ -1,4 +1,4 @@
-package com.abhishekpa.ds;
+package com.abhishekpa.ds.linkedlist;
 
 public class LinkedList
 {

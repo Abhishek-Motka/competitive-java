@@ -1,13 +1,22 @@
-package com.abhishekpa.ds;
+package com.abhishekpa.ds.linkedlist;
 
 import com.abhishekpa.ds.exceptions.InvalidIndexException;
 
+import javax.security.auth.login.CredentialNotFoundException;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-public class SimpleLinkedList<T>
+public class SimpleLinkedList<T extends Comparable>
 {
     private Node<T> head;
+
+    public SimpleLinkedList () {
+        head = null;
+    }
+
+    public SimpleLinkedList(Node<T> head) {
+        this.head = head;
+    }
 
     public void push(T data) {
         if (Objects.isNull(head)) {
@@ -34,7 +43,7 @@ public class SimpleLinkedList<T>
 
         if (Objects.isNull(current)) throw new InvalidIndexException();
 
-        Node<T> node = new Node<>(data, current.next);
+        Node<T> node = new Node<>(data, current.getNext());
         current.setNext(node);
     }
 
@@ -153,12 +162,47 @@ public class SimpleLinkedList<T>
         recursiveReverseUtil(next, curr);
     }
 
+    public Node<T> getHead() {
+        return head;
+    }
+
+    public void sort() {
+        head = mergeSort(head);
+    }
+
+    private Node<T> mergeSort(Node<T> node) {
+        if (Objects.isNull(node) || Objects.isNull(node.getNext())) return node;
+
+        Node<T> middle = getMiddle(node);
+        Node<T> nextOfMiddle = middle.getNext();
+        middle.setNext(null);
+
+        Node<T> left = mergeSort(node);
+        Node<T> right = mergeSort(nextOfMiddle);
+
+        return MergeSortedLists.recursiveMerge(left, right);
+    }
+
+    private Node<T> getMiddle(Node<T> node) {
+        if (Objects.isNull(node)) return node;
+
+        Node<T> slow = node;
+        Node<T> fast = node;
+
+        while(Objects.nonNull(fast.getNext()) && Objects.nonNull(fast.getNext().getNext())) {
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+        }
+
+        return slow;
+    }
+
     public static void main(String[] args)
     {
         SimpleLinkedList<Integer> linkedList = new SimpleLinkedList<>();
-        linkedList.push(1);
-        linkedList.push(2);
         linkedList.push(3);
+        linkedList.push(2);
+        linkedList.push(1);
         linkedList.insert(5, 2);
         linkedList.insert(4, 1);
         linkedList.insert(0, 0);
@@ -177,37 +221,8 @@ public class SimpleLinkedList<T>
         linkedList.printList();
         linkedList.reverseRecursive();
         linkedList.printList();
+        linkedList.sort();
+        linkedList.printList();
         System.out.println("Size: " + linkedList.size());
-    }
-
-    private class Node<T> {
-        private T data;
-        private Node next;
-
-        public Node(T data)
-        {
-            this(data, null);
-        }
-
-        public Node(T data, Node next)
-        {
-            this.data = data;
-            this.next = next;
-        }
-
-        public T getData()
-        {
-            return data;
-        }
-
-        public Node getNext()
-        {
-            return next;
-        }
-
-        public void setNext(Node next)
-        {
-            this.next = next;
-        }
     }
 }
