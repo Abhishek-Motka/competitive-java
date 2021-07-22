@@ -145,6 +145,32 @@ public class SimpleLinkedList<T extends Comparable>
         head = prev;
     }
 
+    public void reverse(int k) {
+        head = reverseKNodes(head, k);
+    }
+
+    public Node<T> reverseKNodes(Node<T> node, int k) {
+        if (Objects.isNull(node)) return node;
+        Node<T> curr = node;
+        Node<T> prev = null;
+        Node<T> next = null;
+
+        int count = 0;
+        while (count < k && Objects.nonNull(curr)) {
+            next = curr.getNext();
+            curr.setNext(prev);
+            prev = curr;
+            curr = next;
+            count++;
+        }
+
+        if (Objects.nonNull(next)) {
+            node.setNext(reverseKNodes(next, k));
+        }
+
+        return prev;
+    }
+
     public void reverseRecursive() {
         if (Objects.isNull(head)) return;
         recursiveReverseUtil(head, null);
@@ -222,6 +248,8 @@ public class SimpleLinkedList<T extends Comparable>
         linkedList.reverseRecursive();
         linkedList.printList();
         linkedList.sort();
+        linkedList.printList();
+        linkedList.reverse(3);
         linkedList.printList();
         System.out.println("Size: " + linkedList.size());
     }
