@@ -13,7 +13,7 @@ public class Stack {
     }
 
     public boolean isEmpty() {
-        return top >= 0;
+        return top < 0;
     }
 
     public int push(int value) {
@@ -25,6 +25,11 @@ public class Stack {
     public int pop() {
         if (this.top < 0) throw new RuntimeException("Stack Underflow");
         return this.values[this.top--];
+    }
+
+    public int peek() {
+        if (this.top < 0) throw new RuntimeException("Stack Underflow");
+        return this.values[this.top];
     }
 
     public int search(int value) {
