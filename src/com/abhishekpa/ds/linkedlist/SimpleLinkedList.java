@@ -223,6 +223,17 @@ public class SimpleLinkedList<T extends Comparable>
         return slow;
     }
 
+    public void rotate(int n) {
+        if (Objects.isNull(head) || Objects.isNull(head.getNext())) return;
+        Node<T> curr = head;
+        while (Objects.nonNull(curr.getNext())) curr = curr.getNext();
+        curr.setNext(head);
+        curr = head;
+        for (int i = 1; i < n; i++) curr = curr.getNext();
+        head = curr.getNext();
+        curr.setNext(null);
+    }
+
     public static void main(String[] args)
     {
         SimpleLinkedList<Integer> linkedList = new SimpleLinkedList<>();
@@ -250,6 +261,8 @@ public class SimpleLinkedList<T extends Comparable>
         linkedList.sort();
         linkedList.printList();
         linkedList.reverse(3);
+        linkedList.printList();
+        linkedList.rotate(2);
         linkedList.printList();
         System.out.println("Size: " + linkedList.size());
     }
