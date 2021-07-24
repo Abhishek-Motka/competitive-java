@@ -1,4 +1,4 @@
-package com.abhishekpa.ds;
+package com.abhishekpa.ds.stack;
 
 import com.abhishekpa.utils.ArrayUtils;
 
