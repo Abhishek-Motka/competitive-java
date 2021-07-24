@@ -1,6 +1,7 @@
 package com.abhishekpa.ds.stack;
 
 import com.abhishekpa.ds.linkedlist.Node;
+import com.abhishekpa.ds.linkedlist.SimpleLinkedList;
 
 import java.util.Objects;
 
@@ -53,11 +54,34 @@ public class LinkedStack<T>
         return i;
     }
 
+    public void reverse() {
+        if (!isEmpty()) {
+            T data = pop();
+            reverse();
+            insertAtBottom(data);
+        }
+    }
+
+    public void insertAtBottom(T data) {
+        if (isEmpty()) {
+            push(data);
+            return;
+        }
+        T top = pop();
+        insertAtBottom(data);
+        push(top);
+    }
+
     public static void main(String[] args)
     {
         LinkedStack<Integer> stack = new LinkedStack<>();
         stack.push(1);
         stack.push(2);
+        SimpleLinkedList<Integer> list = new SimpleLinkedList<>(stack.head);
+        list.printList();
+        stack.reverse();
+        list = new SimpleLinkedList<>(stack.head);
+        list.printList();
         System.out.println(stack.size());
         System.out.println("Is Empty: " + stack.isEmpty());
         System.out.println(stack.peek());
